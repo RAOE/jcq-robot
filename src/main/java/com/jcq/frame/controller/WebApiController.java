@@ -3,13 +3,12 @@ package com.jcq.frame.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jcq.frame.client.JCQClient;
+import com.jcq.frame.client.JcqClient;
 import com.jcq.frame.utils.CommonUtils;
 import com.jcq.frame.utils.XyfJsonResult;
 
 /**
  * webapi 相关的api编写 通过调用api可以实现转发相关信息到群里或者私聊等功能
- * 
  * @author reborn
  */
 @RestController
@@ -30,7 +29,7 @@ public class WebApiController {
 		if (!CommonUtils.check(fromQQ)) {
 			return XyfJsonResult.errorMsg("param error");
 		}
-		JCQClient sc = new JCQClient();
+		JcqClient sc = new JcqClient();
 		sc.getInstance();
 		sc.sendPrivateMessage(message, fromQQ);
 		sc.closeClinet();
@@ -52,7 +51,7 @@ public class WebApiController {
 		if (!CommonUtils.check(fromQQ)||!CommonUtils.check(fromGroup)) {
 			return XyfJsonResult.errorMsg("param error");
 		}
-		JCQClient sc = new JCQClient();
+		JcqClient sc = new JcqClient();
 		sc.getInstance();
 		sc.sendGroupMessage(message, fromQQ, fromGroup);
 		sc.closeClinet();

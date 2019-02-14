@@ -5,23 +5,36 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class JCQClient {
+/**
+ * 
+ * @author reborn
+ *
+ */
+public class JcqClient {
 
-	private int port = 1011;// 端口号 默认1011
-	private String host = "127.0.0.1";//主机号 默认为127.0.0.1
+	/**
+	 * 端口号 默认1011
+	 */
+	private int port = 1011;
+	/**
+	 * 主机号 默认为127.0.0.1
+	 */
+	private String host = "127.0.0.1";
 	private Socket socket = null;
-    /**
-     * 根据自定义的端口号与主机号创建CQ 客户端
-     * @param port
-     * @param host
-     */
-	public JCQClient(int port, String host) {
+
+	/**
+	 * 根据自定义的端口号与主机号创建CQ 客户端
+	 * 
+	 * @param port
+	 * @param host
+	 */
+	public JcqClient(int port, String host) {
 		super();
 		this.port = port;
 		this.host = host;
 	}
 
-	public JCQClient() {
+	public JcqClient() {
 	}
 
 	/**
@@ -39,15 +52,14 @@ public class JCQClient {
 	}
 
 	/**
-	 * 2个异常
+	 * 2个异常 测试代码
 	 * 
 	 * @param args
 	 * @throws UnknownHostException 找不到主机地址异常
 	 * @throws IOException          传输流异常
 	 */
 	public static void main(String[] args) throws UnknownHostException, IOException {
-//		 测试代码
-		JCQClient sc = new JCQClient();
+		JcqClient sc = new JcqClient();
 		sc.getInstance();
 		sc.sendGroupMessage("hello", "986771570", "960441931");
 		sc.closeClinet();
@@ -56,6 +68,7 @@ public class JCQClient {
 
 	/**
 	 * 向指定的QQ发送信息
+	 * 
 	 * @param message 消息
 	 * @param fromQQ  指定QQ号
 	 */
@@ -63,10 +76,11 @@ public class JCQClient {
 		OutputStreamWriter write = null;
 		try {
 			write = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
-			String send = "sendPrivateMessage:" + message + "&" + fromQQ;// 等待发送的数据
+           //等待发送的数据
+			String send = "sendPrivateMessage:" + message + "&" + fromQQ;
 			write.write(send);
 			System.out.println("msg send ok!");
-		} catch (IOException e) {
+		} catch (IOException  e) {
 			e.printStackTrace();
 			// 记录错误日志
 			throw new RuntimeException("客户端发送数据失败" + e);
@@ -76,7 +90,8 @@ public class JCQClient {
 					write.close();
 				}
 			} catch (IOException e) {
-				e.printStackTrace();// 安静的关闭
+				// 安静的关闭
+				e.printStackTrace();
 			}
 
 		}
@@ -84,16 +99,17 @@ public class JCQClient {
 
 	/**
 	 * 向QQ群里指定QQ发送消息
+	 * 
 	 * @param message   消息
 	 * @param fromQQ    指定的QQ
 	 * @param fromGroup 指定的QQ群
 	 */
-	public void sendGroupMessage(String message,String fromQQ,String fromGroup) {
+	public void sendGroupMessage(String message, String fromQQ, String fromGroup) {
 		OutputStreamWriter write = null;
 		try {
 			write = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
-// 这里应该考虑构建json格式的数据进行发送
-			String send = "sendGroupMessage:"+message+"&"+fromQQ+"&"+fromGroup;// 等待发送的数据
+			// 等待发送的数据
+			String send = "sendGroupMessage:" + message + "&" + fromQQ + "&" + fromGroup;
 			write.write(send);
 			System.out.println("msg send ok!");
 

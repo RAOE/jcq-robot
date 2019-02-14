@@ -8,8 +8,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-import ch.qos.logback.core.rolling.helper.IntegerTokenConverter;
-
+/**
+ * 常用工具类
+ * @author reborn
+ *
+ */
 public class CommonUtils {
 
 	public static boolean isEmpty(String str) {
@@ -26,7 +29,12 @@ public class CommonUtils {
 		return map == null || map.size() < 1;
 	}
 
-	// 检查字符串长度，字符串为null返回true
+	/**
+	 * 检查字符串长度，字符串为null返回true
+	 * @param str
+	 * @param length
+	 * @return
+	 */
 	public static boolean isLengthEnough(String str, int length) {
 		if (str == null) {
 			return false;
@@ -48,7 +56,11 @@ public class CommonUtils {
 		return Pattern.matches("^1(\\d{10})$", phoneNum);
 	}
 
-	// 计算一个字符串的MD5值
+	/**
+	 * 计算一个字符串的MD5值
+	 * @param s
+	 * @return
+	 */
 	public final static String calculateMD5(String s) {
 		char hexDigits[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 		try {
@@ -74,16 +86,27 @@ public class CommonUtils {
 		}
 	}
 
-	// 计算两个日期相差天数的绝对值
+	/**
+	 * 计算两个日期相差天数的绝对值
+	 * @param date1
+	 * @param date2
+	 * @return
+	 */
 	public static long calculateApartDays(Date date1, Date date2) {
 		// 一天对应的毫秒值
 		long day = 1000L * 60 * 60 * 24;
 		return Math.abs(date1.getTime() / day - date2.getTime() / day);
 	}
 
+	/**
+	 *  只允许字母和数字  String regEx ="[^a-zA-Z0-9]";
+	 * 清除掉所有特殊字符
+	 * @param str
+	 * @return
+	 * @throws PatternSyntaxException
+	 */
 	public static String StringFilter(String str) throws PatternSyntaxException {
-		// 只允许字母和数字 // String regEx ="[^a-zA-Z0-9]";
-		// 清除掉所有特殊字符
+		
 		String regEx = "[`~!@#$%^&*()+=|{}':;',\\[\\]<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
 		Pattern p = Pattern.compile(regEx);
 		Matcher m = p.matcher(str);
